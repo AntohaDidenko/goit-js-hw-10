@@ -14,8 +14,8 @@ countryInput.addEventListener(
   debounce(onCountryInput, DEBOUNCE_DELAY)
 );
 
-function onCountryInput() {
-  const name = countryInput.value.trim();
+function onCountryInput(e) {
+  const name = e.target.value.trim();
   if (name === '') {
     return (countryList.innerHTML = ''), (countryInfo.innerHTML = '');
   }
@@ -29,6 +29,7 @@ function onCountryInput() {
           'beforeend',
           renderCountryList(countries)
         );
+
         countryInfo.insertAdjacentHTML(
           'beforeend',
           renderCountryInfo(countries)
@@ -68,7 +69,7 @@ function renderCountryInfo(countries) {
             <li class="country-info__item"><p><b>Population: </b>${population}</p></li>
             <li class="country-info__item"><p><b>Languages: </b>${Object.values(
               languages
-            ).join(', ')}</p></li>
+            ).join('')}</p></li>
         </ul>
         `;
     })
